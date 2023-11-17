@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon server.js",
-        "create-user": "node ./command/create-user.js"
+        "create-user": "node ./command/create-user.js",
+        "create-admin": "node ./command/create-admin.js",
+        "create-order": "node ./command/create-order.js"
     },
     "keywords": [],
     "author": "",

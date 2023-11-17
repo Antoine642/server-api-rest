@@ -2,6 +2,7 @@ const { Router } = require("express");
 const requireRoles = require("../middlewares/require-role");
 const requireAuth = require("../middlewares/require-auth");
 const User = require("../models/User");
+const Hash = require("../utils/hash");
 
 class UserController {
   static async getUsers(req, res) {
@@ -23,7 +24,8 @@ class UserController {
 
   static async createUser(req, res) {
     try {
-      const { email, name, password } = req.body;
+      const { email, name } = req.body;
+      const password = await Hash.hash(req.body.password);
       const user = new User({ email, name, password });
       await user.save();
       res.send(user);

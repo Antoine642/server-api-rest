@@ -1,6 +1,14 @@
 ### Possibilité de créer un utilisateur admin via :
 ```
-php bin/console app:create-admin
+npm run create-admin
+```
+### Possibilité de créer un utilisateur user via :
+```
+npm run create-user
+```
+### Possibilité de créer une commande via :
+```
+npm run create-order
 ```
 ### Lancer le serveur
 ```

@@ -11,24 +11,26 @@ const requireRole = require("../middlewares/require-role");
 
 // Routes pour les utilisateurs
 router.get("/users", [requireAuth, requireRole(["ADMIN"])], UserController.getUsers);
-router.get("/user/me", [requireAuth], UserController.getCurrentUser);
+router.get("/user/@me", [requireAuth], UserController.getCurrentUser);
 router.get("/users/:id", UserController.getUserById);
 router.post("/users", UserController.createUser);
 
 // Routes pour les restaurants require role admin
-router.get("/restaurants", RestaurantController.getRestaurants);
-router.get("/restaurants/:id", RestaurantController.getRestaurantById);
-router.post("/restaurants", RestaurantController.createRestaurant);
+router.get("/restaurants", [requireAuth, requireRole(["ADMIN"])], RestaurantController.getRestaurants);
+router.get("/restaurants/@me", [requireAuth, requireRole(["RESTAURANT"])], RestaurantController.getRestaurantById);
+router.patch("/restaurants/@me", [requireAuth, requireRole(["RESTAURANT"])], RestaurantController.updateRestaurant);
+router.post("/restaurants", [requireAuth, requireRole(["ADMIN"])], RestaurantController.createRestaurant);
+router.delete("/restaurants/:id", [requireAuth, requireRole(["ADMIN"])],RestaurantController.deleteRestaurant);
 
 // Routes pour les assiettes role restaurant
-router.get("/plates", PlateController.getPlates);
-router.get("/plates/:id", PlateController.getPlateById);
-router.post("/plates", PlateController.createPlate);
+router.get("/plates", [requireAuth, requireRole(["RESTAURANT"])], PlateController.getPlates);
+router.get("/plates/:id", [requireAuth, requireRole(["RESTAURANT"])], PlateController.getPlateById);
+router.post("/plates", [requireAuth, requireRole(["RESTAURANT"])], PlateController.createPlate);
+router.patch("/plates/:id", [requireAuth, requireRole(["RESTAURANT"])], PlateController.updatePlate);
 
 // Routes pour les commandes role restaurant
-router.get("/orders", OrderController.getOrders);
-router.get("/orders/:id", OrderController.getOrderById);
-router.post("/orders", OrderController.createOrder);
+router.get("/orders", [requireAuth, requireRole(["RESTAURANT"])], OrderController.getOrders);
+router.patch("/orders/:id", [requireAuth, requireRole(["RESTAURANT"])], OrderController.cancelOrder);
 
 // Routes pour l'authentification
 router.post("/login", AuthenticationController.login);

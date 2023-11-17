@@ -28,7 +28,7 @@ async function main() {
     const password = response.password;
     //hash
     response.password = await Hash.hash(password);
-    const user = new User({...response, role: "USER"});
+    const user = new User({...response, role: "ADMIN"});
     await user.save();
     console.log("User created!");
     process.exit();

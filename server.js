@@ -25,7 +25,7 @@ db.once('open', () => {
   const port = process.env.APP_PORT || 3000;
 
   app.use((error, req, res, next) => {
-    console.log(error.status)
+    console.log(error)
     if (error?.status) {
       res.status(error?.status).send({
         code: error?.code,
