@@ -2,6 +2,7 @@
 ```
 npm run create-admin
 ```
+Ne pas tenir compte des erreurs.
 ### Possibilité de créer un utilisateur user via :
 ```
 npm run create-user
