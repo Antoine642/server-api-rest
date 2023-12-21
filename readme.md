@@ -1,7 +1,9 @@
+### backoffice : https://github.com/Antoine642/backoffice-api-template
 ### Possibilité de créer un utilisateur admin via :
 ```
 npm run create-admin
 ```
+Ne pas tenir compte des erreurs.
 ### Possibilité de créer un utilisateur user via :
 ```
 npm run create-user
